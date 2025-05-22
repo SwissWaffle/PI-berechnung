@@ -4,9 +4,8 @@
 # SuperFastPython.com
 # example of an attempted race condition with a shared variable
 import threading
-from time import sleep
-from multiprocessing import Process
-from multiprocessing import set_start_method
+import time
+import math
 values = [1.0]
 sum = 0
 
@@ -47,4 +46,9 @@ if __name__ == '__main__':
     # wait for total calc to finish
     #report the value
     #print(f'Value: {values[4]}')
-    print(f'Value: {sum}')
+    rel_error = 100*((math.pi-sum)/sum)
+    diff= sum-math.pi
+    print(f'Value = {sum}')
+    print(f'Pi = {math.pi}')
+    print(f'Diff to Pi = {diff}')
+    print(f'rel_error ={rel_error:^ .10f}%')
