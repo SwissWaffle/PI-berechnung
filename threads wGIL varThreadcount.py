@@ -6,7 +6,7 @@
 import threading
 import time
 import math
-values = [1.0]
+values = [0.0]
 sum = 0
 
 # erstellt brüche zwischen 1/range_min und 1/range_max
@@ -35,7 +35,7 @@ if __name__ == '__main__':
         if(n==0):
             exec('producer'+str(n)+'_thread = threading.Thread(target=producer, args=(1, 1000))')
         else:
-            exec('producer'+str(n)+'_thread = threading.Thread(target=producer, args=('+str((n*1000)+1)+', '+str((n+1)*1000)+'))')
+            exec('producer'+str(n)+'_thread = threading.Thread(target=producer, args=('+str((n*1000)+n)+', '+str(((n+1)*1000)+n)+'))')
         
     #starting threads
     for n in range(nr_of_threads):
