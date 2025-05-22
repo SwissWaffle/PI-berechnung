@@ -12,11 +12,9 @@ values = [1.0]
 def producer(range_min, range_max):
     global values
     k = range_min
-    sleep(0)
     for i in range(range_min, range_max):
         values.append((-1 if (i%2) else +1)/((2*k)+1))
         k = k+1
-    sleep(0)
     return
  
 # zusammer zähler der brüche
@@ -32,21 +30,18 @@ if __name__ == '__main__':
     set_start_method('spawn')
     # define the global variable
     producer1_process = Process(target=producer, args=(1, 1000))
-    producer2_process = Process(target=producer, args=(1001, 2000))
+    #producer2_process = Process(target=producer, args=(1001, 2000))
     producer1_process.start()
-    producer2_process.start()
+    #producer2_process.start()
     
     print('Waiting for processes to finish...')
     #producer_thread.join()
     # starting total calc
     producer1_process.join()
-    producer2_process.join()
+    #producer2_process.join()
     
     sum = consumer()
-    #consumer_thread = Process(target=consumer)
-    #consumer_thread.start()
-    #consumer_thread.join()
     # wait for total calc to finish
     # report the value
-    #print(f'Value: {values[4]}')
+    print(f'Value: {values[1]}')
     print(f'Value: {sum}')
