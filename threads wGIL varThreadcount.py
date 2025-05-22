@@ -28,15 +28,17 @@ def consumer():
     return
  
 if __name__ == '__main__':
+    t=time.process_time_ns()
     # var nr_of_threads ändern zur gewünschten thread anzahl, darf nicht <=0 sein
-    nr_of_threads = 8
+    nr_of_threads = 1
     for n in range(nr_of_threads):
         #erstellung der threads 
         if(n==0):
             exec('producer'+str(n)+'_thread = threading.Thread(target=producer, args=(1, 1000))')
         else:
             exec('producer'+str(n)+'_thread = threading.Thread(target=producer, args=('+str((n*1000)+n)+', '+str(((n+1)*1000)+n)+'))')
-        
+    elapsed = time.process_time_ns() - t
+    print(f'starting Producer at: {elapsed:7.1f}ns')
     #starting threads
     for n in range(nr_of_threads):
         exec('producer'+str(n)+'_thread.start()')
@@ -45,7 +47,8 @@ if __name__ == '__main__':
     
     for n in range(nr_of_threads):
         exec('producer'+str(n)+'_thread.join()')
-        
+    elapsed= time.process_time_ns() - elapsed
+    print(f'Threads finished at: {elapsed:7.1f}ns')
     # starting total calc
     consumer_thread = threading.Thread(target=consumer)
     consumer_thread.start()
