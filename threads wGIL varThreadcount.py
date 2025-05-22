@@ -6,7 +6,7 @@
 import threading
 import time
 import math
-values = [0.0]
+values = [1.0]
 sum = 0
 
 # erstellt brüche zwischen 1/range_min und 1/range_max
